@@ -113,7 +113,7 @@ const LoginForm = () => {
             </div>
             {isNewUser && (
               <div className="text-gray-400">
-                New user? You're signing up.
+                New user? You are signing up.
               </div>
             )}
             <div className="text-right text-gray-400 hover:underline hover:text-gray-100">

@@ -6,7 +6,7 @@ function Risk1() {
 <div className="bg-gray-700 justify-center rounded-lg shadow-lg p-6 m-10 ">
   <h2 className="text-2xl font-bold text-orange-600">Mild Risk Detected</h2>
   <p className="text-gray-300 mt-4">
-    You have a mild risk of heart disease. This means some factors may increase your risk. It's time to take steps to improve your heart health.
+    You have a mild risk of heart disease. This means some factors may increase your risk. It is time to take steps to improve your heart health.
   </p>
 
   <h3 className="text-lg font-semibold text-gray-400 mt-6">What Can  Contributes to Mild Risk?</h3>

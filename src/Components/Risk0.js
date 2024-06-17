@@ -6,7 +6,7 @@ function Risk0() {
             <div className="bg-gray-700  justify-center rounded-lg shadow-lg p-6 m-10">
                 <h2 className="text-2xl font-bold text-green-600">No Risk Detected!</h2>
                 <p className="text-gray-300  mt-4 ">
-                    Congratulations! You have no significant risk factors for heart disease. This means you're leading a healthy lifestyle. Keep it up!
+                    Congratulations! You have no significant risk factors for heart disease. This means you are leading a healthy lifestyle. Keep it up!
                 </p>
 
                 <h3 className=" text-gray-400 text-lg font-semibold mt-6">Health Benefits</h3>

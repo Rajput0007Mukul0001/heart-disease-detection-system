@@ -268,7 +268,7 @@ function Page() {
                 <div>
                     <h3 className="text-xl font-bold mb-2 text-green-600">10. Anulom Vilom (Alternate Nostril Breathing)</h3>
                     <p className="text-gray-300 mb-4">
-                        Anulom Vilom improves cardiovascular health by balancing the body's energy channels.
+                        Anulom Vilom improves cardiovascular health by balancing the bodys energy channels.
                     </p>
                     <p className="text-gray-300">
                         <strong>Benefits:</strong> Improves respiratory function, reduces stress, and enhances heart health.

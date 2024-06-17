@@ -19,7 +19,7 @@ function Content() {
       </div>
 
       <div className="bg-zinc-800 rounded-lg shadow-lg border text-gray-400 border-zinc-700 m-4 p-6 h-full">
-      Heart disease prediction involves analyzing 13 key parameters, including age, cholesterol levels, blood pressure, and results from ECG tests. These factors contribute to understanding a person's risk of heart disease, enabling early intervention and preventive care. Our system uses advanced algorithms to assess these parameters, providing insights that help doctors make informed decisions about diagnosis and treatment.
+      Heart disease prediction involves analyzing 13 key parameters, including age, cholesterol levels, blood pressure, and results from ECG tests. These factors contribute to understanding a persons risk of heart disease, enabling early intervention and preventive care. Our system uses advanced algorithms to assess these parameters, providing insights that help doctors make informed decisions about diagnosis and treatment.
         <div className="flex justify-between items-center mt-4">
           <div className="text-gray-600 text-sm">
             <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8898839/" className="underline">

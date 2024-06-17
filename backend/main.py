@@ -264,3 +264,5 @@ async def process_post_request(input_data: InputData):
 
     return JSONResponse(content={'Patient_Data': received_data,'Detection':int(answer[0])})
 
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
