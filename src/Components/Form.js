@@ -218,9 +218,11 @@ function Form() {
 }
 
 console.log(ans);
-ans=3
+// ans=3
 
 export {ans}
 export {formdetail}
+
+
 
 export default Form;

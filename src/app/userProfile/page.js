@@ -8,7 +8,7 @@ import Navbar2 from '../../Components/Navbar2';
 import { formdetail, ans } from '../../Components/Form';
 
 function UserDetailProfile() {
-  const { userdetail, loading: authLoading, logout } = useAuth();
+  const { userdetail, loading: authLoading, logout,ud } = useAuth();
   const [userdetailData, setUserDetailData] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ function UserDetailProfile() {
     const fetchUserDetailData = async () => {
       if (userdetail) {
         try {
-          const userDetailRef = doc(db, 'userdetails', userdetail.uid);
+          const userDetailRef = doc(db, 'userdetails', ud);
           const userDetailDoc = await getDoc(userDetailRef);
           if (userDetailDoc.exists()) {
             const data = userDetailDoc.data();
@@ -71,7 +71,7 @@ function UserDetailProfile() {
     e.preventDefault();
     if (userdetail) {
       try {
-        const userDetailRef = doc(db, 'userdetails', userdetail.uid);
+        const userDetailRef = doc(db, 'userdetails', ud);
         await setDoc(userDetailRef, formData, { merge: true });
         setUserDetailData(formData);
         setEditMode(false);
@@ -97,7 +97,7 @@ function UserDetailProfile() {
           <p className="text-gray-900 mt-2">Phone: {userdetailData?.phoneNumber || 'Phone Number'}</p>
           <p className="text-gray-900 mt-2">Email: {userdetailData?.email || userdetail.providerData[0].email || 'Email'}</p>
           {/* <p className="text-gray-900 mt-2">Prediction Result: {JSON.stringify(formData.predictionResult) || 'No prediction result'}</p> */}
-          <p className="text-gray-900 mt-2">Last Detection: {formData.detection || 'No detection result'}</p>
+          {/* <p className="text-gray-900 mt-2">Last Detection: {formData.detection || 'No detection result'}</p> */}
           <button
             className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
             onClick={() => setEditMode(true)}

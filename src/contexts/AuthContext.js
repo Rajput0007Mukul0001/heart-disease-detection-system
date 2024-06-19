@@ -18,6 +18,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("Guest");
   const [userdetail,setUserdetail] = useState("");
+  const [ud,setUd] = useState("");
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -26,6 +28,10 @@ export const AuthProvider = ({ children }) => {
         setUserdetail(user)
         console.log(user)
         console.log(user.displayName)
+        setUd(user.uid);
+        
+        console.log(ud)
+
         setUsername(user.displayName || user.email || "Gust");
         setIsAuthenticated(true);
       } else {
@@ -55,7 +61,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{isAuthenticated,userdetail, username, login, signUp, loginWithGoogle, logout, loading }}>
+    <AuthContext.Provider value={{isAuthenticated,ud,userdetail, username, login, signUp, loginWithGoogle, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

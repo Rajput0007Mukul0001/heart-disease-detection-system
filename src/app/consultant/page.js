@@ -236,18 +236,18 @@ function Page() {
       <img className="text-3xl w-4/5  font-bold text-black-400 mb-6 rounded-lg mx-auto bg-zinc-600 p-6 " src='https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWVkaWNhbCUyMGxvZ298ZW58MHx8MHx8fDA%3D' alt='doctor consultant'/>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {doctors.map((doctor, index) => (
-          <div key={index} className="bg-gray-700 rounded-lg shadow-lg p-6 text-gray-300">
+          <div key={index} className="bg-gray-700 rounded-lg shadow-lg p-3 text-gray-300">
             <img src={doctor.avatar} alt={doctor.name} className="w-24 h-24 rounded-full mx-auto" />
             <h3 className="text-xl font-bold text-red-600 mt-4">{doctor.name}</h3>
-            <p className="text-green-400">{doctor.specialty}</p>
+            <p className="text-green-400 break-words">{doctor.specialty}</p>
             <p className="text-gray-400">Experience: {doctor.experience} years</p>
-            <p className="text-red-400">Available: {doctor.availability}</p>
+            <p className="text-red-400 break-words">Available: {doctor.availability}</p>
             <p className="text-gray-400">Fee: ${doctor.fee}</p>
-            <p className="text-gray-400">Email: {doctor.email}</p>
+            <p className="text-gray-400 break-words">Email:{doctor.email}</p>
             <br/>
-            <p className="text-blue-500 " >Call me : {doctor.phone}</p>
+            <p className="text-blue-500 break-words" >Call me : {doctor.phone}</p>
             <br/>
-            <span className='flex  gap-4 text-blue-500'> <img className="text-blue-500 h-8 w-10 " src='https://media.istockphoto.com/id/1527295767/photo/whatsapp-inspired-logo-contain-telephone-and-white-bubble.webp?b=1&s=170667a&w=0&k=20&c=GV8w2lfOL86qi5qLHV4eB7MCqXnW3KI8SDxJUxSMP7I=' alt='whatsapp'/>: {doctor.phone}</span>
+            <span className='flex  gap-4 text-blue-500 break-words'> <img className="text-blue-500 h-8 w-10 " src='https://media.istockphoto.com/id/1527295767/photo/whatsapp-inspired-logo-contain-telephone-and-white-bubble.webp?b=1&s=170667a&w=0&k=20&c=GV8w2lfOL86qi5qLHV4eB7MCqXnW3KI8SDxJUxSMP7I=' alt='whatsapp'/>: {doctor.phone}</span>
             <br/>
             <hr className='underline bg-blue-500 text-cyan-500'/>
             {/* <input className="text-gray-400"  type='phone' /> */}

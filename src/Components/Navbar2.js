@@ -37,7 +37,7 @@ function Navbar2() {
           {/* Use Link component to navigate to home page */}
           <Link href="/">
             {/* <a> */}
-              <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-400 border-2 border-blue-400"></div>
+              <img className="h-10 w-10 rounded-full cursor-pointer bg-gray-400 border-2 border-blue-400" src='https://media.istockphoto.com/id/2151517078/photo/female-doctor-woman-with-clean-white-suit-medical-hospital-3d-icon-illustration-render-design.jpg?s=612x612&w=0&k=20&c=e6A5QnNKjcY1uJz0K6LgISN2hgx-bfI8k_7VmXQVItM=' alt=''></img>
             {/* </a> */}
           </Link>
         </div>

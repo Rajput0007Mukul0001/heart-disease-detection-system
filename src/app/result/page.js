@@ -12,36 +12,75 @@ import DoctorSupportCard from '../../Components/DoctorSupportCard';
 import Navbar2 from '../../Components/Navbar2';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { db } from '../../firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-
+import { doc, setDoc } from 'firebase/firestore';
+import { useAuth } from '../../contexts/AuthContext';
+import Link from 'next/link'
 import { ans, formdetail } from '../../Components/Form';
+
+const ranges = {
+  age: [10, 77],
+  sex: [0, 1],
+  cp: [0, 3],
+  trestbps: [94, 200],
+  chol: [126, 564],
+  fbs: [0, 1],
+  restecg: [0, 2],
+  thalach: [71, 202],
+  exang: [0, 1],
+  oldpeak: [0.0, 6.2],
+  slope: [0, 2],
+  ca: [0, 3],
+  thal: [0, 3]
+};
+
+const checkRanges = (formData) => {
+  const outOfRangeItems = [];
+  for (const key in formData) {
+    const value = parseFloat(formData[key]);
+    if (ranges[key] && (value < ranges[key][0] || value > ranges[key][1])) {
+      outOfRangeItems.push(`${key} is out of range: ${value}`);
+    }
+  }
+  return outOfRangeItems;
+};
+
+function AbnormalValuesCard({ outOfRangeItems }) {
+  return (
+    <div className="p-6 bg-red-700 m-4 rounded-lg shadow-lg text-gray-200">
+      <h2 className="text-xl font-bold mb-4 text-center">Some Abnormal Values Detected</h2>
+      <ul>
+        {outOfRangeItems.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+      <br/>
+       <Link href={"/consultant"}>
+      <p className='text-green-400  font-extrabold underline'>Please consult a healthcare professional.</p>
+      </Link>
+    </div>
+  );
+}
 
 export default function Result() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [risk, setRisk] = useState(3);
+  const { ud } = useAuth();
+  const [risk, setRisk] = useState(0);
+  const [outOfRangeItems, setOutOfRangeItems] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        
-        if (ans !== undefined && ans !== null) {
+        if (formdetail && ans !== undefined && ans !== null && ud) {
           setRisk(parseInt(ans));
-          // Save to database
-          const user = JSON.parse(localStorage.getItem('user'));
-          if (user && user.uid) {
-            const userDetailRef = doc(db, 'userdetails', user.uid);
-            const userDetailDoc = await getDoc(userDetailRef);
-            if (userDetailDoc.exists()) {
-              await setDoc(userDetailRef, {
-                ...userDetailDoc.data(),
-                predictionResult: formdetail || userDetailDoc.data().predictionResult || {},
-                detection: ans || userDetailDoc.data().detection || 'No detection result',
-              }, { merge: true });
-            }
-          }
+          setOutOfRangeItems(checkRanges(formdetail));
+
+          const userDetailRef = doc(db, 'userdetails', ud);
+          await setDoc(userDetailRef, {
+            predictionResult: formdetail,
+            detection: ans
+          }, { merge: true });
         } else {
-          console.error('Invalid prediction value:', ans);
+          console.error('Invalid form data, prediction value, or user ID:', ans, ud);
           router.push('/'); // Redirect to homepage or error page
         }
       } catch (error) {
@@ -50,13 +89,11 @@ export default function Result() {
     };
 
     fetchData();
-  }, [ans, formdetail, router]);
+  }, [ans, formdetail, router, ud]);
 
   const handleSubmitForm = (formData) => {
-    // Handle form submission logic here, e.g., API calls, state updates
     console.log('Form data:', formData);
   };
-
 
   let content;
   let componentPage;
@@ -72,7 +109,7 @@ export default function Result() {
       );
       componentPage = <Risk0 />;
       break;
-    case 1:
+    case 2:
       content = (
         <div className="p-6 bg-yellow-600 m-4 rounded-lg shadow-lg text-gray-900">
           <h1>Low Risk Detected</h1>
@@ -81,7 +118,7 @@ export default function Result() {
       );
       componentPage = <Risk1 />;
       break;
-    case 2:
+    case 3:
       content = (
         <div className="p-6 bg-orange-600 m-4 rounded-lg shadow-lg text-gray-200">
           <h1>Moderate Risk Detected</h1>
@@ -90,7 +127,7 @@ export default function Result() {
       );
       componentPage = <Risk2 />;
       break;
-    case 3:
+    case 1:
       content = (
         <div className="p-6 bg-red-700 m-4 rounded-lg shadow-lg text-gray-200">
           <h1>High Risk Detected</h1>
@@ -119,9 +156,10 @@ export default function Result() {
           The result and risk factors are determined here. Prescriptions, suggestions, and care will follow based on the level of risk involved.
         </p>
       </div>
+      {outOfRangeItems.length > 0 && <AbnormalValuesCard outOfRangeItems={outOfRangeItems} />}
       {content}
       {componentPage}
-      {risk === 3 ? DoctorSupport : <div></div>}
+      {risk === 1 ? DoctorSupport : <div></div>}
       <Footer />
     </>
   );

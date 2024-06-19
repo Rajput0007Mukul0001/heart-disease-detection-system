@@ -8,10 +8,12 @@ import Link from 'next/link'
 
 function Navbar() {
 
-  const { username, logout,isAuthenticated } = useAuth();
+  const { username,ud, logout,isAuthenticated } = useAuth();
   // const router = useRouter();
   
   console.log(username)
+  console.log("uid")
+  console.log(ud);
 
   const goToProfile = () => {
     // router.push('/userProfile');
@@ -87,7 +89,8 @@ function Navbar() {
               </div>
 
               {/* <!-- Foto --> */}
-              <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-400 border-2 border-blue-400"></div>
+              <img className="h-10 w-10 rounded-full cursor-pointer bg-gray-400 border-2 border-blue-400 " src='https://media.istockphoto.com/id/2151517078/photo/female-doctor-woman-with-clean-white-suit-medical-hospital-3d-icon-illustration-render-design.jpg?s=612x612&w=0&k=20&c=e6A5QnNKjcY1uJz0K6LgISN2hgx-bfI8k_7VmXQVItM=' alt=''></img>
+            
             </div>
           </header>
 
