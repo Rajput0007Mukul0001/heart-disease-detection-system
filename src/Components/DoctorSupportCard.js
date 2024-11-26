@@ -51,10 +51,10 @@ function DoctorSupportCard({ onSubmit }) {
     const formData = { name, email, phone, country, location };
     onSubmit(formData);
   };
-
+// 23.053967 , 72.603844
   const fetchNearestHospitals = async (latitude, longitude) => {
     try {
-      const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&type=amenity&lang=en&limit=10&format=json&apiKey=6f469685bcb34639a988546bbbfa40b1`;
+      const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&type=amenity&lang=en&limit=100&format=json&apiKey=6f469685bcb34639a988546bbbfa40b1`;
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');

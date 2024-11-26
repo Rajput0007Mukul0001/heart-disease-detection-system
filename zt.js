@@ -1,5 +1,4 @@
-// Result.js
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Footer from '../../Components/Footer';
@@ -11,15 +10,16 @@ import Risk4 from '../../Components/Risk4';
 import AboutUs from '../../Components/AboutUs';
 import DoctorSupportCard from '../../Components/DoctorSupportCard';
 import Navbar2 from '../../Components/Navbar2';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { db } from '../../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../../contexts/AuthContext';
-import Link from 'next/link';
-import { ans_card,formdetail_card } from '../../Components/Cards';
+import Link from 'next/link'
 import { ans, formdetail } from '../../Components/Form';
+import {formdetail_card,ans_card} from '../../Components/Cards'
 
-// const router = useRouter();
+
+
 
 const ranges = {
   age: [10, 77],
@@ -57,55 +57,35 @@ function AbnormalValuesCard({ outOfRangeItems }) {
           <li key={index}>{item}</li>
         ))}
       </ul>
-      <br />
-      <Link href={"/consultant"}>
-        <p className='text-green-400 font-extrabold underline'>Please consult a healthcare professional.</p>
+      <br/>
+       <Link href={"/consultant"}>
+      <p className='text-green-400  font-extrabold underline'>Please consult a healthcare professional.</p>
       </Link>
     </div>
   );
 }
 
 export default function Result() {
+  const router = useRouter();
   const { ud } = useAuth();
-  const [risk, setRisk] = useState(4);
+  const [risk, setRisk] = useState(0);
   const [outOfRangeItems, setOutOfRangeItems] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let finalAns = ans;
-        let finalFormDetail = formdetail;
+        if (formdetail && ans !== undefined && ans !== null && ud) {
+          setRisk(parseInt(ans));
+          setOutOfRangeItems(checkRanges(formdetail));
 
-        // && (ans === null || ans === undefined) cahce me store hoga toh form hi rahega hamesa idhar 
-
-        if (ans_card !== undefined && ans_card !== null ) {
-          finalAns = ans_card;
-        }
-        // && (formdetail === null || formdetail === undefined)
-
-        if (formdetail_card !== undefined && formdetail_card !== null ) {
-          finalFormDetail = formdetail_card;
-        }
-        
-        // now case got updated everytime too because form is default
-        // but also we have to clear cache for the card too right
-         
-        console.log("final hai bhai")
-        console.log(finalAns)
-        console.log(finalFormDetail)
-
-        setRisk(parseInt(finalAns));
-        setOutOfRangeItems(checkRanges(finalFormDetail));
-
-        if (finalFormDetail && finalAns !== undefined && finalAns !== null && ud) {
           const userDetailRef = doc(db, 'userdetails', ud);
           await setDoc(userDetailRef, {
-            predictionResult: finalFormDetail,
-            detection: finalAns
+            predictionResult: formdetail,
+            detection: ans
           }, { merge: true });
         } else {
-          console.error('Invalid form data, prediction value, or user ID:', finalAns, ud);
-          // router.push('/'); // Redirect to homepage or error page
+          console.error('Invalid form data, prediction value, or user ID:', ans, ud);
+          router.push('/'); // Redirect to homepage or error page
         }
       } catch (error) {
         console.error('Error updating user detail data:', error);
@@ -113,11 +93,10 @@ export default function Result() {
     };
 
     fetchData();
-  }, [ans, ans_card, formdetail, formdetail_card, ud]);
+  }, [ans, formdetail, router, ud]);
 
   const handleSubmitForm = (formData) => {
     console.log('Form data:', formData);
-    console.log(formdetail_card)
   };
 
   let content;
@@ -172,8 +151,6 @@ export default function Result() {
       componentPage = <Risk4 />;
   }
 
-
-
   return (
     <>
       <Navbar2 />
@@ -183,13 +160,11 @@ export default function Result() {
           The result and risk factors are determined here. Prescriptions, suggestions, and care will follow based on the level of risk involved.
         </p>
       </div>
-      {content}
       {outOfRangeItems.length > 0 && <AbnormalValuesCard outOfRangeItems={outOfRangeItems} />}
+      {content}
       {componentPage}
       {risk === 1 ? DoctorSupport : <div></div>}
-      
       <Footer />
     </>
   );
-
 }

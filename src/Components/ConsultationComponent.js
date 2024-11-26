@@ -66,7 +66,7 @@ function DoctorSupportCard({ onSubmit }) {
     <div className="bg-gray-700 rounded-lg shadow-lg p-6 m-10">
       <h2 className="text-2xl font-bold text-red-600 mb-4">Emergency & Doctor Support</h2>
       <p className="text-gray-300">
-        For patients with a high risk of heart disease, it's crucial to have quick access to emergency services and direct doctor support. Here are some essential services available to you.
+        For patients with a high risk of heart disease, it is crucial to have quick access to emergency services and direct doctor support. Here are some essential services available to you.
       </p>
 
       <div className="mt-6">

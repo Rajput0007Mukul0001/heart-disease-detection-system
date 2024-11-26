@@ -6,7 +6,7 @@ function AboutUs() {
     {/* <!-- component --> */}
 {/* <!-- This is an example component --> */}
 <div>
-    <section className =" text-gray-400 bg-zinc-800">
+    <section className =" text-gray-400 flex bg-zinc-800">
       <div className ="max-w-6xl mx-auto px-5 py-24 ">
         <div className ="flex flex-wrap w-full mb-20 flex-col items-center text-center">
           <h3 className =" title-font mb-2 text-4xl font-extrabold leading-10 tracking-tight text-left sm:text-2xl sm:leading-none md:text-3xl">Team Members</h3>
@@ -44,9 +44,9 @@ function AboutUs() {
           </div>
 
 
-          <div className ="xl:w-1/3 md:w-1/2 p-4">
-            <div className ="border border-gray-600 p-6 rounded-lg">
-              <div className ="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+          <div className ="xl:w-1/3 md:w-1/2 p-0">
+            {/* <div className ="border border-gray-600 p-6 rounded-lg"> */}
+              {/* <div className ="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                 <svg className =" fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z"/></svg>
               </div>
               <h2 className ="text-lg  font-medium title-font mb-2">Aman Kumar Verma</h2>
@@ -64,8 +64,8 @@ function AboutUs() {
                     <path fill="#667EEA" d="M2.6 17.667h3.5v-7.334H2.6z"/></g></svg>
                     Graduation
                 </span>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
 
 

@@ -1,2 +1,21 @@
 52,1,0,128,204,1,1,156,1,1,1,0,0,0
 34,0,1,118,210,0,1,192,0,0.7,2,0,2,1
+
+{
+"age": "19",
+"sex": "0",
+"cp": "1",
+"trestbps": "64",
+"chol": "74",
+"fbs": "67",
+"restecg": "67",
+"thalach": "59",
+"exang": "53",
+"oldpeak": "742.6",
+"slope": "0",
+"ca": "0",
+"thal": "47"
+}
+
+this the object formdetail have ok
+here in
